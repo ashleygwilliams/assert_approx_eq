@@ -25,3 +25,9 @@ macro_rules! assert_approx_eq {
 fn it_should_not_panic_if_values_are_approx_equal() {
   assert_approx_eq!(64f32.sqrt(), 8f32);
 }
+
+#[test]
+#[should_panic]
+fn it_should_panic_if_values_are_not_approx_equal() {
+  assert_approx_eq!(3 as f32, 4 as f32);
+}
