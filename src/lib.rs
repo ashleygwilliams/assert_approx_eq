@@ -1,3 +1,15 @@
+/// Asserts that two expressions are approximately (~1.0e-6) equal to each other.
+///
+/// On panic, this macro will print the values of the expressions with their
+/// debug representations.
+///
+/// # Examples
+///
+/// ```should panic
+/// # #[macro_use] extern crate assert_approx_eq;
+///
+/// assert_ne!(a, b);
+/// ```
 #[macro_export]
 macro_rules! assert_approx_eq {
     ($a:expr, $b:expr) => ({
