@@ -1,23 +1,30 @@
 /// Asserts that two expressions are approximately (~1.0e-6) equal to each other.
 ///
 /// On panic, this macro will print the values of the expressions with their
-/// debug representations.
+/// debug representations. You can optionally add an optional diff value. If you
+/// don't supply a diff value as an argument, `1.0e-6` is the default used. 
 ///
 /// # Examples
 ///
 /// ```should panic
 /// # #[macro_use] extern crate assert_approx_eq;
 ///
-/// assert_ne!(a, b);
+/// let a = 3f64;
+/// let b = 4f64;
+///
+/// assert_approx_eq!(a, b); //panics
+/// assert_approx_eq!(a, b, 2f64); //does not panic
+/// assert_approx_eq!(a, b, 1e-3f64); // panics
 /// ```
 #[macro_export]
 macro_rules! assert_approx_eq {
     ($a:expr, $b:expr) => ({
+        let eps = 1.0e-6;
         let (a, b) = (&$a, &$b);
-        assert!((*a - *b).abs() < 1.0e-6,
+        assert!((*a - *b).abs() < eps,
                 "assertion failed: `(left !== right)` \
-                           (left: `{:?}`, right: `{:?}`)",
-                 *a, *b);
+                           (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)",
+                 *a, *b, eps, (*a - *b).abs());
     });
     ($a:expr, $b:expr, $eps:expr) => ({
         let (a, b) = (&$a, &$b);
