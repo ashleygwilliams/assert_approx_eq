@@ -8,7 +8,7 @@
 ///
 /// ```should panic
 /// #[macro_use] 
-///  extern crate assert_approx_eq;
+/// extern crate assert_approx_eq;
 ///
 /// let a = 3f64;
 /// let b = 4f64;
