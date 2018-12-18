@@ -5,7 +5,7 @@
 [![travis badge](https://api.travis-ci.org/ashleygwilliams/assert_approx_eq.svg?branch=master)](https://travis-ci.org/ashleygwilliams/assert_approx_eq)
 [![appveyor badge](https://ci.appveyor.com/api/projects/status/j6q5vay6ryne4du7?svg=true)](https://ci.appveyor.com/project/ashleygwilliams/assert-approx-eq)
 
-This crate exports a macro for asserting that two numbers are approximately equal (~1.0e-6, by default) to each other.
+This crate exports a macro for asserting that two numbers are approximately equal (`1.0e-6`, by default) to each other.
 
 On panic, this macro will print the values of the expressions with their
 debug representations. You can optionally add an optional diff value. If you
@@ -23,7 +23,7 @@ use assert_approx_eq::assert_approx_eq;
 let a = 3f64;
 let b = 4f64;
 
-assert_approx_eq!(a, b); //panics
+assert_approx_eq!(a, b); // panics
 assert_approx_eq!(a, b, 2f64); //does not panic
 assert_approx_eq!(a, b, 1e-3f64); // panics
 ```
