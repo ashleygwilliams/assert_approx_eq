@@ -7,7 +7,7 @@
 /// # Examples
 ///
 /// ```should panic
-/// # #[macro_use] extern crate assert_approx_eq;
+/// use assert_approx_eq::assert_approx_eq;
 ///
 /// let a = 3f64;
 /// let b = 4f64;
