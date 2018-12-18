@@ -28,4 +28,6 @@ assert_approx_eq!(a, b, 2f64); //does not panic
 assert_approx_eq!(a, b, 1e-3f64); // panics
 ```
 
-You can read documentation for how to use this crate on [docs.rs](https://docs.rs/assert_approx_eq).
+You can read documentation for how to use this crate on [docs.rs](https://docs.rs/assert_approx_eq) or [view the example].
+
+[view the example]: examples/assert_approx_eq.rs
