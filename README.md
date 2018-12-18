@@ -1,5 +1,5 @@
 # assert_approx_eq
-> assert approximately equal macro
+> a rust macro for asserting 2 numbers are approximately equal 
 
 [![crates.io badge](https://img.shields.io/crates/v/assert_approx_eq.svg)](https://crates.io/crates/assert_approx_eq)
 [![travis badge](https://api.travis-ci.org/ashleygwilliams/assert_approx_eq.svg?branch=master)](https://travis-ci.org/ashleygwilliams/assert_approx_eq)
