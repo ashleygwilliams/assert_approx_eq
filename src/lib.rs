@@ -28,10 +28,11 @@ macro_rules! assert_approx_eq {
     });
     ($a:expr, $b:expr, $eps:expr) => ({
         let (a, b) = (&$a, &$b);
-        assert!((*a - *b).abs() < $eps,
+        let eps = $eps;
+        assert!((*a - *b).abs() < eps,
                 "assertion failed: `(left !== right)` \
                            (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)",
-                 *a, *b, $eps, (*a - *b).abs());
+                 *a, *b, eps, (*a - *b).abs());
     })  
 }
 
@@ -55,4 +56,20 @@ fn compare_with_explicit_eps() {
 #[should_panic]
 fn bad_compare_with_explicit_eps() {
     assert_approx_eq!(3f64, 4f64, 1e-3f64);
+}
+
+// Make sure the value used for epsilon in the assert_eq
+// is the same as the value used in the error message.
+#[test]
+#[should_panic(expected = "expect diff: `1")]
+fn should_evaluate_eps_only_once() {
+    let mut count = 0_f64;
+
+    // `count` will be 1.0 the first time the curly-braced block
+    // is evaluated but 2.0 the second time.
+    assert_approx_eq!(0_f64, 100_f64, {
+        count += 1_f64;
+        count
+    });
+
 }
