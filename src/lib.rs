@@ -2,7 +2,7 @@
 ///
 /// On panic, this macro will print the values of the expressions with their
 /// debug representations. You can optionally add an optional diff value. If you
-/// don't supply a diff value as an argument, `1.0e-6` is the default used. 
+/// don't supply a diff value as an argument, `1.0e-6` is the default used.
 ///
 /// # Examples
 ///
@@ -18,33 +18,43 @@
 /// ```
 #[macro_export]
 macro_rules! assert_approx_eq {
-    ($a:expr, $b:expr) => ({
+    ($a:expr, $b:expr) => {{
         let eps = 1.0e-6;
         let (a, b) = (&$a, &$b);
-        assert!((*a - *b).abs() < eps,
-                "assertion failed: `(left !== right)` \
-                           (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)",
-                 *a, *b, eps, (*a - *b).abs());
-    });
-    ($a:expr, $b:expr, $eps:expr) => ({
+        assert!(
+            (*a - *b).abs() < eps,
+            "assertion failed: `(left !== right)` \
+             (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)",
+            *a,
+            *b,
+            eps,
+            (*a - *b).abs()
+        );
+    }};
+    ($a:expr, $b:expr, $eps:expr) => {{
         let (a, b) = (&$a, &$b);
         let eps = $eps;
-        assert!((*a - *b).abs() < eps,
-                "assertion failed: `(left !== right)` \
-                           (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)",
-                 *a, *b, eps, (*a - *b).abs());
-    })  
+        assert!(
+            (*a - *b).abs() < eps,
+            "assertion failed: `(left !== right)` \
+             (left: `{:?}`, right: `{:?}`, expect diff: `{:?}`, real diff: `{:?}`)",
+            *a,
+            *b,
+            eps,
+            (*a - *b).abs()
+        );
+    }};
 }
 
 #[test]
 fn it_should_not_panic_if_values_are_approx_equal() {
-  assert_approx_eq!(64f32.sqrt(), 8f32);
+    assert_approx_eq!(64f32.sqrt(), 8f32);
 }
 
 #[test]
 #[should_panic]
 fn it_should_panic_if_values_are_not_approx_equal() {
-  assert_approx_eq!(3 as f32, 4 as f32);
+    assert_approx_eq!(3 as f32, 4 as f32);
 }
 
 #[test]
@@ -71,5 +81,4 @@ fn should_evaluate_eps_only_once() {
         count += 1_f64;
         count
     });
-
 }
