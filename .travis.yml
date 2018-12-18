@@ -6,3 +6,8 @@ rust:
 matrix:
   allow_failures:
     - rust: nightly
+script:
+  - cargo test
+  - rustup component add rustfmt
+  - cargo fmt --version
+  - cargo fmt --all -- --check
